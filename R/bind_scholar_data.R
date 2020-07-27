@@ -6,14 +6,15 @@
 ##' @param ... targets to bind
 bind_scholar_data <- function(...) {
 
-  data_to_bind <- list(...)
+  # safer to bind if all numerics are coerced to characters.
+  supp <- list(...) %>% 
+    map(mutate_if, is.numeric, as.character) %>% 
+    bind_rows()
   
-  supp <- bind_rows(data_to_bind) %>% 
-    # safer to bind to main if all numerics are coerced to characters.
-    mutate_if(is.numeric, as.character)
+  main <- read_csv(file.path('data', 'scholar.csv'))
   
-  main <- read_csv(file.path('data', 'BCJ.csv'))
-  
-  bind_rows(main, supp)
+  list(main, supp) %>% 
+    map(mutate_if, is.numeric, as.character) %>% 
+    bind_rows()
 
 }

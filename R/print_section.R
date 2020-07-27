@@ -9,6 +9,7 @@
 ##' @param section_id 
 ##'
 print_section <- function(position_data, section_id){
+  
   position_data %>% 
     filter(section == section_id) %>% 
     arrange(desc(end)) %>% 

@@ -7,14 +7,14 @@
 ##' @param infile
 ##' @param scholar_citations 
 ##' @param author 
-clean_pubs <- function(infile, scholar_citations, author) {
+clean_pubs <- function(infile, scholar_citations, .author) {
 
   data_pubs <- read_csv(file.path(here(),'data', infile))
   
   just_the_citations <- scholar_citations %>% 
     select(ID, cites)
   
-  bold_author <- glue("**{author}**") 
+  bold_author <- glue("**{.author}**") 
   
   left_join(data_pubs, just_the_citations, by = "ID") %>% 
     select(-ID) %>% 
@@ -22,13 +22,11 @@ clean_pubs <- function(infile, scholar_citations, author) {
     mutate(
       cites = if_else(is.na(cites), 0, cites),
       section = 'publications',
-      in_resume = FALSE,
       # bolden author name
-      author = gsub(
-        pattern = author,
-        replacement = bold_author,
-        x = author,
-        fixed = TRUE
+      author = str_replace(
+        string = author,
+        pattern = fixed(.author),
+        replacement = bold_author
       ),
       # replace .. with ... (why? writing ... in .csv files breaks my R)
       author = gsub(

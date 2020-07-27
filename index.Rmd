@@ -21,7 +21,7 @@ knitr::opts_chunk$set(
 source(file.path(here::here(), 'packages.R'))
 R.utils::sourceDirectory(file.path(here::here(), 'R'))
 
-
+loadd("author_long")
 loadd("scholar_citations_summary")
 loadd("scholar_data")
 
@@ -74,7 +74,7 @@ This resume was made with the R package [**pagedown**](https://github.com/rstudi
 Main
 ================================================================================
 
-Byron C. Jaeger {#title}
+`r author_long` {#title}
 --------------------------------------------------------------------------------
 
 I am an Assistant Professor of Biostatistics. I work in the School of Public Health at the University of Alabama at Birmingham. 
@@ -116,6 +116,24 @@ Publications {data-icon=laptop}
 ```{r}
 
 print_section(scholar_data, 'publications')
+
+```
+
+Grants submitted {data-icon=laptop}
+--------------------------------------------------------------------------------
+
+```{r}
+
+print_section(scholar_data, 'grants')
+
+```
+
+R Packages {data-icon=laptop}
+--------------------------------------------------------------------------------
+
+```{r}
+
+print_section(scholar_data, 'r_packages')
 
 ```
 

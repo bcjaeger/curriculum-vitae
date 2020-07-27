@@ -7,6 +7,9 @@ library(drake)
 # packages for data retrieval and management
 library(scholar)
 library(tidyverse)
+library(lubridate)
+library(dlstats)
+library(tblStrings)
 library(glue)
 library(here)
 # packages for document knitting
