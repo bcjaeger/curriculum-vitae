@@ -30,7 +30,7 @@ the_plan <- drake_plan(
                         .author = scholar_short),
   
   r_packages = clean_r_packages(infile = 'r_packages.csv', 
-                                scholar_id = scholar_id),
+                                scholar_pubs = scholar_pubs),
   
   # bind selected data together
   scholar_data = bind_scholar_data(pubs, grants, r_packages),

@@ -5,10 +5,10 @@
 ##' @title
 ##' @param infile
 ##' @param scholar_id
-clean_r_packages <- function(infile = "r_packages.csv", scholar_id = scholar_id) {
+clean_r_packages <- function(infile = "r_packages.csv", scholar_pubs) {
 
-  scholar_rpacks <- get_publications(scholar_id) %>%
-    select(google_id = pubid, cites)
+  scholar_rpacks <- scholar_pubs %>%
+    select(google_id = ID, cites)
   
   data_rpacks <- read_csv(file.path('data', infile)) %>% 
     separate_rows(google_id, sep = '; ') %>% 
