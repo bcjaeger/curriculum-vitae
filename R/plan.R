@@ -9,25 +9,25 @@ the_plan <- drake_plan(
   # - If you have a profile already, your Google Scholar ID will be shown in
   #   the URL. Otherwise, please follow the registration prompts and your 
   #   Google Scholar ID will be in the URL.
-  scholar_id  = '4IKD_roAAAAJ&hl=en&oi=ao',
-  author_abbr = "BC Jaeger",
-  author_long = 'Byron C. Jaeger',
+  scholar_id   = '4IKD_roAAAAJ&hl=en&oi=ao',
+  scholar_short = "BC Jaeger",
+  scholar_long  = 'Byron C. Jaeger',
   
   # get citation info
-  scholar_citations = citations_scrape(scholar_id),
+  scholar_pubs = get_scholar_pubs(scholar_id),
   
-  scholar_citations_summary = citations_summarize(scholar_citations),
+  total_citations = with(scholar_pubs, glue("Total citations: {sum(cites)}")),
 
   # each dataset represents a section in the CV
   # pubs -> Publications section
   # grants -> Grants submitted section
   
   pubs = clean_pubs(infile = 'publications.csv', 
-                    scholar_citations = scholar_citations,
-                    .author = author_abbr),
+                    scholar_pubs = scholar_pubs,
+                    .author = scholar_short),
   
   grants = clean_grants(infile = 'grants.csv', 
-                        .author = author_abbr),
+                        .author = scholar_short),
   
   r_packages = clean_r_packages(infile = 'r_packages.csv', 
                                 scholar_id = scholar_id),

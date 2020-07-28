@@ -21,9 +21,9 @@ knitr::opts_chunk$set(
 source(file.path(here::here(), 'packages.R'))
 R.utils::sourceDirectory(file.path(here::here(), 'R'))
 
-loadd("author_long")
-loadd("scholar_citations_summary")
+loadd("scholar_long")
 loadd("scholar_data")
+loadd("total_citations")
 
 ```
 
@@ -63,7 +63,7 @@ Skills {#skills}
 Stats {#stats}
 --------------------------------------------------------------------------------
 
-`r scholar_citations_summary`
+`r total_citations`
 
 
 Disclaimer {#disclaimer}
@@ -74,7 +74,7 @@ This resume was made with the R package [**pagedown**](https://github.com/rstudi
 Main
 ================================================================================
 
-`r author_long` {#title}
+`r scholar_long` {#title}
 --------------------------------------------------------------------------------
 
 I am an Assistant Professor of Biostatistics. I work in the School of Public Health at the University of Alabama at Birmingham. 
@@ -110,7 +110,7 @@ print_section(scholar_data, 'teach_xp')
 ```
 
 
-Publications {data-icon=laptop}
+Publications {data-icon=book}
 --------------------------------------------------------------------------------
 
 ```{r}

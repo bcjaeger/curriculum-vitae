@@ -5,12 +5,12 @@
 ##' .. content for \details{} ..
 ##'
 ##' @title print CV sections
-##' @param position_data 
+##' @param scholar_data 
 ##' @param section_id 
 ##'
-print_section <- function(position_data, section_id){
+print_section <- function(scholar_data, section_id){
   
-  position_data %>% 
+  scholar_data %>% 
     filter(section == section_id) %>% 
     arrange(desc(end)) %>% 
     mutate(
@@ -52,16 +52,18 @@ print_section <- function(position_data, section_id){
       description_bullets = if_else(
         condition = is.na(aside),
         true = description_bullets,
-        false = as.character(glue(
-          "{description_bullets}",
-          "\n\n", 
-          ":::aside",
-          "\n",
-          "{aside}",
-          "\n",
-          ":::"
+        false = as.character(
+          glue(
+            "{description_bullets}",
+            "\n\n", 
+            ":::aside",
+            "\n",
+            "{aside}",
+            "\n",
+            ":::"
+          )
         )
-        ))
+      )
     ) %>% 
     glue_data(
       "### {title}",
