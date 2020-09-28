@@ -32,7 +32,7 @@ clean_r_packages <- function(infile = "r_packages.csv", scholar_pubs) {
     group_by(package) %>% 
     summarize(downloads = sum(downloads), .groups = 'drop') %>% 
     transmute(title = as.character(package),
-              downloads = tbl_val(downloads))
+              downloads = format(downloads, big.mark = ','))
   
   data_rpacks %>% 
     group_by(title, link_cran, link_github, subtitle) %>% 

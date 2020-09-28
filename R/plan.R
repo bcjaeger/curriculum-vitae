@@ -36,7 +36,7 @@ the_plan <- drake_plan(
   scholar_data = bind_scholar_data(pubs, grants, r_packages),
   
   # build your .Rmd CV
-  target_name = target(
+  rmd_output = target(
     command = {
       rmarkdown::render(knitr_in("index.Rmd"))
       file_out("index.html")
