@@ -18,12 +18,17 @@ knitr::opts_chunk$set(
   results = 'asis'
 )
 
-source(file.path(here::here(), 'packages.R'))
-R.utils::sourceDirectory(file.path(here::here(), 'R'))
+# loads all drake targets
+loadd(pubs,
+      pres, 
+      grants, 
+      r_packages,
+      scholar_long)
 
-loadd("scholar_long")
-loadd("scholar_data")
-loadd("total_citations")
+scholar_data <- bind_scholar_data(pubs$data, 
+                                  pres$data, 
+                                  grants$data, 
+                                  r_packages$data)
 
 ```
 
@@ -32,7 +37,7 @@ Aside
 ================================================================================
 
 
-![Byron C. Jaeger](img/venice_amanda_and_byron.jpg){width=80%}
+![Byron C. Jaeger](img/amanda_byron_kingsley.jpeg){width=80%}
 
 Contact {#contact}
 --------------------------------------------------------------------------------
@@ -63,7 +68,10 @@ Skills {#skills}
 Stats {#stats}
 --------------------------------------------------------------------------------
 
-`r total_citations`
+- Citations:           `r pubs$inline$total_citations` 
+- First author papers: `r pubs$inline$total_first_author`
+- CRAN downloads:      `r r_packages$inline$total_downloads` 
+- Active grants:       `r grants$inline$total_active`
 
 
 Disclaimer {#disclaimer}
@@ -77,10 +85,9 @@ Main
 `r scholar_long` {#title}
 --------------------------------------------------------------------------------
 
-I am an Assistant Professor of Biostatistics. I work in the School of Public Health at the University of Alabama at Birmingham. 
+I am an Assistant Professor of Biostatistics and work in the School of Public Health at the University of Alabama at Birmingham. 
 
-My research focuses on describing the role of diurnal (night-time) blood pressure patterns in developing cardiovascular disease and building predictive algorithms that can be used to support clinical decision-making.
-
+My research focuses on blood pressure, cardiovascular disease, and machine learning.
 
 Education {data-icon=graduation-cap data-concise=true}
 --------------------------------------------------------------------------------
@@ -119,21 +126,32 @@ print_section(scholar_data, 'publications')
 
 ```
 
+R Packages {data-icon=laptop}
+--------------------------------------------------------------------------------
+
+
+```{r}
+
+print_section(scholar_data, 'r_packages')
+
+```
+
+Presentations {data-icon=book}
+--------------------------------------------------------------------------------
+
+```{r}
+
+print_section(scholar_data, 'presentations')
+
+```
+
+
 Grants submitted {data-icon=laptop}
 --------------------------------------------------------------------------------
 
 ```{r}
 
 print_section(scholar_data, 'grants')
-
-```
-
-R Packages {data-icon=laptop}
---------------------------------------------------------------------------------
-
-```{r}
-
-print_section(scholar_data, 'r_packages')
 
 ```
 

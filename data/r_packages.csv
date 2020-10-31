@@ -1,3 +1,7 @@
-title,link_cran,link_github,subtitle,google_id
-r2glmm,https://cran.r-project.org/web/packages/r2glmm/index.html,https://github.com/bcjaeger/r2glmm,Compute model and semi-partial R-squared for mixed models,Zph67rFs4hoC; M3ejUd6NZC8C
-obliqueRSF,https://CRAN.R-project.org/package=obliqueRSF,https://github.com/bcjaeger/obliqueRSF,Oblique random survival forest (ORSFs),
+title,on_cran,link,subtitle,google_id,aside
+r2glmm,yes,https://github.com/bcjaeger/r2glmm,Compute model and semi-partial R-squared for mixed models,Zph67rFs4hoC; M3ejUd6NZC8C,
+obliqueRSF,yes,https://github.com/bcjaeger/obliqueRSF,Oblique random survival forest (ORSFs),,
+table.glue,yes,https://github.com/bcjaeger/table.glue,Make and Apply Customized Rounding Specifications for Tables,,
+tibbleOne,no,https://github.com/bcjaeger/tibbleOne,Convenient framework to tabulate participant characteristics.,,
+ipa,no,https://github.com/bcjaeger/ipa,Imputation for predictive analytics,,
+xgboost.surv,no,https://github.com/bcjaeger/xgboost.surv,Extreme Gradient Boosting for Survival Analysis,,

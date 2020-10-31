@@ -11,6 +11,7 @@ library(lubridate)
 library(dlstats)
 library(glue)
 library(here)
+library(table.glue)
 # packages for document knitting
 library(rmarkdown)
 library(pagedown)

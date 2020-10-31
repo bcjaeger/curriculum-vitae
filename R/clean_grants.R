@@ -9,9 +9,22 @@ clean_grants <- function(infile, .author) {
 
   bold_author <- glue("**{.author}**") 
   
-  read_csv(file.path("data", infile)) %>%
-    arrange(desc(date_processed)) %>%
-    separate(date_processed, into = c('month', 'day', 'year')) %>% 
+  data_in <- read_csv(file.path("data", infile)) %>%
+    as_tibble(.name_repair = 'universal') %>%
+    select(
+      title = Project.Title,
+      subtitle = PI.Name,
+      description_1 = Primary.Sponsor,
+      description_2 = Project.Status,
+      grant_num = Sponsor.Award.Number,
+      date_processed = Processed.Date
+    ) %>%
+    arrange(desc(date_processed)) 
+  
+  total_active <- sum(tolower(data_in$description_2) == 'active')
+  
+  data_out <- data_in %>%
+    separate(date_processed, into = c('year', 'month', 'day')) %>% 
     mutate(
       section = 'grants',
       subtitle = str_replace(
@@ -34,6 +47,9 @@ clean_grants <- function(infile, .author) {
       starts_with("descr"),
       end = year
     )
+  
+  list(inline = list(total_active = total_active),
+       data = data_out)
   
 
 }

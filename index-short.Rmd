@@ -1,0 +1,163 @@
+---
+title: "Byron C. Jaeger's resume"
+author: Byron C. Jaeger
+date: "`r Sys.Date()`"
+output:
+  pagedown::html_resume:
+    css: ['css/styles.css', 'resume']
+    self_contained: true
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(
+	message = FALSE,
+	warning = FALSE,
+	include = TRUE,
+  echo = FALSE,
+  results = 'asis'
+)
+
+# loads all drake targets
+loadd(pubs,
+      pres, 
+      grants, 
+      r_packages,
+      scholar_long)
+
+scholar_data <- bind_scholar_data(pubs$data, 
+                                  pres$data, 
+                                  grants$data, 
+                                  r_packages$data)
+
+```
+
+
+Aside
+================================================================================
+
+
+![Byron C. Jaeger](img/amanda_byron_kingsley.jpeg){width=80%}
+
+Contact {#contact}
+--------------------------------------------------------------------------------
+
+- bcjaeger@uab.edu `r fa_address_book()`
+- [GitHub `r ii_social_github()`](https://github.com/bcjaeger) 
+- [Twitter `r ii_social_twitter()`](https://twitter.com/byron_jaeger) 
+
+
+Skills {#skills}
+--------------------------------------------------------------------------------
+
+**Statistical analysis:**
+
+- Linear mixed models
+- Survival analysis
+
+**Statistical / Machine learning:**
+
+- Clinical risk prediction
+- Missing data
+
+**Statistical Programming:**
+
+- R 
+- C++
+
+Stats {#stats}
+--------------------------------------------------------------------------------
+
+- Citations:           `r pubs$inline$total_citations` 
+- First author papers: `r pubs$inline$total_first_author`
+- CRAN downloads:      `r r_packages$inline$total_downloads` 
+- Active grants:       `r grants$inline$total_active`
+
+
+Disclaimer {#disclaimer}
+--------------------------------------------------------------------------------
+
+This resume was made with the R package [**pagedown**](https://github.com/rstudio/pagedown).
+
+Main
+================================================================================
+
+`r scholar_long` {#title}
+--------------------------------------------------------------------------------
+
+I am an Assistant Professor of Biostatistics and work in the School of Public Health at the University of Alabama at Birmingham. 
+
+My research focuses on blood pressure, cardiovascular disease, and machine learning.
+
+Education {data-icon=graduation-cap data-concise=true}
+--------------------------------------------------------------------------------
+
+```{r}
+
+scholar_data %>% 
+  filter(title == 'PhD, Biostatistics') %>% 
+  print_section('education')
+
+```
+
+Professional Experience {data-icon=suitcase}
+--------------------------------------------------------------------------------
+
+```{r}
+
+scholar_data %>% 
+  filter(title == 'Assistant Professor of Biostatistics') %>% 
+  print_section('prof_xp')
+
+```
+
+Teaching Experience {data-icon=chalkboard-teacher}
+--------------------------------------------------------------------------------
+
+```{r}
+
+print_section(scholar_data, 'teach_xp')
+
+```
+
+
+Selected Publications {data-icon=book}
+--------------------------------------------------------------------------------
+
+```{r}
+
+select_papers <- c(
+  "Trends in blood pressure control",
+  "Oblique Random Survival Forests",
+  "R-squared"
+)
+
+scholar_data %>% 
+  filter(
+    str_detect(
+      string = title, 
+      pattern = paste(select_papers, collapse = '|')
+    )
+  ) %>% 
+  print_section('publications')
+
+```
+
+Selected R Packages {data-icon=laptop}
+--------------------------------------------------------------------------------
+
+```{r}
+
+select_packages <- c("table.glue", "obliqueRSF", "r2glmm")
+
+scholar_data %>% 
+  filter(
+    str_detect(
+      string = title, 
+      pattern = paste(select_packages, collapse = '|')
+    )
+  ) %>% 
+  print_section('r_packages')
+
+```
+

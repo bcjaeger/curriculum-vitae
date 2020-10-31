@@ -26,22 +26,32 @@ the_plan <- drake_plan(
                     scholar_pubs = scholar_pubs,
                     .author = scholar_short),
   
+  pres = clean_pres(infile = 'presentations.csv',
+                    scholar_pubs = scholar_pubs,
+                    .author = scholar_short),
+  
   grants = clean_grants(infile = 'grants.csv', 
                         .author = scholar_short),
   
   r_packages = clean_r_packages(infile = 'r_packages.csv', 
                                 scholar_pubs = scholar_pubs),
   
-  # bind selected data together
-  scholar_data = bind_scholar_data(pubs, grants, r_packages),
-  
   # build your .Rmd CV
-  rmd_output = target(
+  website_output = target(
     command = {
       rmarkdown::render(knitr_in("index.Rmd"))
       file_out("index.html")
     }
-  )
+  ),
+  
+  short_output = target(
+    command = {
+      rmarkdown::render(knitr_in("index-short.Rmd"))
+      file_out("index-short.html")
+    }
+  ),
+  
+  short_pdf = pagedown::chrome_print('index-short.html')
   
 
 )

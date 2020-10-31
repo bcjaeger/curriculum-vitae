@@ -11,6 +11,7 @@ clean_r_packages <- function(infile = "r_packages.csv", scholar_pubs) {
     select(google_id = ID, cites)
   
   data_rpacks <- read_csv(file.path('data', infile)) %>% 
+    filter(on_cran == 'yes') %>% 
     separate_rows(google_id, sep = '; ') %>% 
     left_join(scholar_rpacks, by = 'google_id')
   
@@ -18,6 +19,8 @@ clean_r_packages <- function(infile = "r_packages.csv", scholar_pubs) {
     distinct(title) %>% 
     pull(title) %>% 
     cran_stats(use_cache = FALSE)
+  
+  total_downloads <- table_value(sum(stats_rpacks$downloads))
   
   years_rpacks <- stats_rpacks %>% 
     group_by(package) %>% 
@@ -28,25 +31,38 @@ clean_r_packages <- function(infile = "r_packages.csv", scholar_pubs) {
               .groups = 'drop') %>% 
     rename(title = package)
   
-  total_downloads <- stats_rpacks %>% 
+  total_downloads_by_package <- stats_rpacks %>% 
     group_by(package) %>% 
     summarize(downloads = sum(downloads), .groups = 'drop') %>% 
     transmute(title = as.character(package),
               downloads = format(downloads, big.mark = ','))
   
-  data_rpacks %>% 
-    group_by(title, link_cran, link_github, subtitle) %>% 
+  data_out <- data_rpacks %>% 
+    group_by(title, link, subtitle) %>% 
     summarize(cites = sum(cites), .groups = 'drop') %>% 
     left_join(years_rpacks, by = 'title') %>% 
-    left_join(total_downloads, by = 'title') %>% 
-    transmute(section = 'r_packages', 
-              title,
-              subtitle, 
-              location = NA_character_,
-              start, 
-              end,
-              description_1 = glue("[GitHub Repository]({link_github})"),
-              description_2 = glue("Total downloads: {downloads}"),
-              description_3 = glue("Total citations: {cites}"))
+    left_join(total_downloads_by_package, by = 'title') %>% 
+    arrange(desc(start)) %>% 
+    transmute(
+      section = 'r_packages', 
+      title,
+      subtitle, 
+      location = NA_character_,
+      start, 
+      end,
+      description_1 = glue("[GitHub Repository]({link})"),
+      description_2 = glue("Total downloads: {downloads}"),
+      description_3 = if_else(
+        is.na(cites),
+        NA_character_,
+        as.character(glue("Total citations: {cites}"))
+      )
+    )
+  
+  list(
+    inline = list(
+      total_downloads = total_downloads
+    ), 
+    data = data_out)
   
 }
