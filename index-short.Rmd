@@ -120,6 +120,24 @@ print_section(scholar_data, 'teach_xp')
 
 ```
 
+Selected R Packages {data-icon=laptop}
+--------------------------------------------------------------------------------
+
+```{r}
+
+select_packages <- c("table.glue", "obliqueRSF", "r2glmm")
+
+scholar_data %>% 
+  filter(
+    str_detect(
+      string = title, 
+      pattern = paste(select_packages, collapse = '|')
+    )
+  ) %>% 
+  print_section('r_packages')
+
+```
+
 
 Selected Publications {data-icon=book}
 --------------------------------------------------------------------------------
@@ -140,24 +158,6 @@ scholar_data %>%
     )
   ) %>% 
   print_section('publications')
-
-```
-
-Selected R Packages {data-icon=laptop}
---------------------------------------------------------------------------------
-
-```{r}
-
-select_packages <- c("table.glue", "obliqueRSF", "r2glmm")
-
-scholar_data %>% 
-  filter(
-    str_detect(
-      string = title, 
-      pattern = paste(select_packages, collapse = '|')
-    )
-  ) %>% 
-  print_section('r_packages')
 
 ```
 

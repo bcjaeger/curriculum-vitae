@@ -155,3 +155,11 @@ print_section(scholar_data, 'grants')
 
 ```
 
+Grants submitted {data-icon=laptop}
+--------------------------------------------------------------------------------
+
+```{r}
+
+print_section(scholar_data, 'peer_rev')
+
+```
