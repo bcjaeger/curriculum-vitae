@@ -44,6 +44,8 @@ the_plan <- drake_plan(
     }
   ),
   
+  full_pdf = pagedown::chrome_print('index.html'),
+  
   short_output = target(
     command = {
       rmarkdown::render(knitr_in("index-short.Rmd"))

@@ -163,7 +163,7 @@ print_section(scholar_data, 'grants')
 
 ```
 
-Grants submitted {data-icon=laptop}
+Peer review {data-icon=laptop}
 --------------------------------------------------------------------------------
 
 ```{r}

@@ -24,7 +24,7 @@ clean_grants <- function(infile, .author) {
   total_active <- sum(tolower(data_in$description_2) == 'active')
   
   data_out <- data_in %>%
-    separate(date_processed, into = c('year', 'month', 'day')) %>% 
+    separate(date_processed, into = c('month', 'day', 'year')) %>% 
     mutate(
       section = 'grants',
       subtitle = str_replace(
