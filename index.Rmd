@@ -69,7 +69,7 @@ Stats {#stats}
 --------------------------------------------------------------------------------
 
 - Citations:           `r pubs$inline$total_citations` 
-- First author papers: `r pubs$inline$total_first_author`
+- Papers: `r pubs$inline$total_pubs` (`r pubs$inline$total_first_author` first author)
 - CRAN downloads:      `r r_packages$inline$total_downloads` 
 - Active grants:       `r grants$inline$total_active`
 
@@ -145,6 +145,14 @@ print_section(scholar_data, 'presentations')
 
 ```
 
+Guest lectures {data-icon=laptop}
+--------------------------------------------------------------------------------
+
+```{r}
+
+print_section(scholar_data, 'guest_lec')
+
+```
 
 Grants submitted {data-icon=laptop}
 --------------------------------------------------------------------------------
@@ -161,5 +169,23 @@ Grants submitted {data-icon=laptop}
 ```{r}
 
 print_section(scholar_data, 'peer_rev')
+
+```
+
+Mentorship {data-icon=laptop}
+--------------------------------------------------------------------------------
+
+```{r}
+
+print_section(scholar_data, 'mentorship')
+
+```
+
+Service {data-icon=laptop}
+--------------------------------------------------------------------------------
+
+```{r}
+
+print_section(scholar_data, 'service')
 
 ```

@@ -16,7 +16,7 @@ the_plan <- drake_plan(
   # get citation info
   scholar_pubs = get_scholar_pubs(scholar_id),
   
-  total_citations = with(scholar_pubs, glue("Total citations: {sum(cites)}")),
+  #total_citations = with(scholar_pubs, glue("Total citations: {sum(cites)}")),
 
   # each dataset represents a section in the CV
   # pubs -> Publications section

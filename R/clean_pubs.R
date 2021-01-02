@@ -52,11 +52,13 @@ clean_pubs <- function(infile, scholar_pubs, .author) {
     )
   
   total_first_author = sum(str_detect(data_out$subtitle, "^\\*\\*BC Jaeger"))
+  total_pubs = nrow(data_out)
   
   list(
     inline = list(
       total_citations = total_citations,
-      total_first_author = total_first_author
+      total_first_author = total_first_author,
+      total_pubs = total_pubs
     ), 
     data = data_out)
   
