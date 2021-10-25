@@ -37,23 +37,15 @@ the_plan <- drake_plan(
                                 scholar_pubs = scholar_pubs),
   
   # build your .Rmd CV
-  website_output = target(
-    command = {
-      rmarkdown::render(knitr_in("index.Rmd"))
-      file_out("index.html")
-    }
-  ),
+  # this needs to be done manually now
+  # and should also be cone before making the targets below
+  # website_output = target(
+  #   command = {
+  #     rmarkdown::render(knitr_in("index.Rmd"))
+  #     file_out("index.html")
+  #   }
+  # ),
   
-  full_pdf = pagedown::chrome_print('index.html'),
+  # to make the pdf version, run pagedown::chrome_print('index.html'),
   
-  short_output = target(
-    command = {
-      rmarkdown::render(knitr_in("index-short.Rmd"))
-      file_out("index-short.html")
-    }
-  ),
-  
-  short_pdf = pagedown::chrome_print('index-short.html')
-  
-
 )

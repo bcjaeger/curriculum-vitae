@@ -15,7 +15,7 @@ library(table.glue)
 # packages for document knitting
 library(rmarkdown)
 library(pagedown)
-library(icon)
+library(icons)
 
 conflict_prefer('filter', 'dplyr')
 conflict_prefer('set_names', 'purrr')

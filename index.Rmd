@@ -18,6 +18,9 @@ knitr::opts_chunk$set(
   results = 'asis'
 )
 
+source("packages.R")
+R.utils::sourceDirectory('R')
+
 # loads all drake targets
 loadd(pubs,
       pres, 
@@ -42,9 +45,16 @@ Aside
 Contact {#contact}
 --------------------------------------------------------------------------------
 
-- bcjaeger@uab.edu `r fa_address_book()`
-- [GitHub `r ii_social_github()`](https://github.com/bcjaeger) 
-- [Twitter `r ii_social_twitter()`](https://twitter.com/byron_jaeger) 
+```{r}
+fa_book <- icons::fontawesome$regular$`address-book`
+github <- fontawesome$brands$github
+twitter <- fontawesome$brands$twitter
+```
+
+
+- bcjaeger@uab.edu `r fa_book`
+- [GitHub `r github`](https://github.com/bcjaeger) 
+- [Twitter `r twitter`](https://twitter.com/byron_jaeger) 
 
 
 Skills {#skills}

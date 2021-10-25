@@ -17,3 +17,9 @@ get_scholar_pubs <- function(scholar_id, write_file = FALSE) {
   cites_by_pub
   
 }
+
+# tmp <- read_csv('data/publications.csv') %>% select(ID, title)
+# 
+# tmp2 <- select(cites_by_pub, ID, title)
+# 
+# anti_join(tmp2, tmp, by = 'ID')
